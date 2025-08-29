@@ -1,79 +1,136 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Video Player HTMLAPP24</title>
-    <meta name="robots" content="noindex">
-    <link href="https://cdn.jsdelivr.net/npm/clappr@latest/src/components/core/public/fonts.min.css" rel="stylesheet">
-    <script src="https://content.jwplatform.com/libraries/IDzF9Zmk.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقديم على كلان Seven 7</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS styles */
-        *, ::before, ::after { box-sizing: border-box }
-        html, body { height: 100%; margin: 0; padding: 0; background: #fff }
-        .container-fluid { display: flex; flex-direction: column; height: 100%; padding: 0; margin: 0 }
-        .buttons-section { padding: 1px; margin-bottom: 0; display: flex; flex-wrap: wrap; justify-content: center; overflow-x: auto; white-space: nowrap }
-        .buttons-section .btn { flex: 1 0 auto; padding: 10px; margin: 1px; white-space: normal; text-align: center; cursor: pointer; transition: background-color 0.3s, color .3s; font-size: .8rem; line-height: 1.7; border-radius: 5px; background-color: #221f1f; color: #fff; border: 1px solid #fff; font-weight: 600 }
-        .buttons-section .btn.selected { background-color: #a90202; color: #fff; border: none; font-size: .9rem; font-weight: 700 }
-        .buttons-section .btn:hover { background-color: #a90202 }
-        .player-container { position: relative; flex: 1; background-color: #000 }
-        #player { width: 100%; height: 100% }
-        .overlay-text { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); color: #fff; background-color: rgba(0, 0, 0, 0.6); padding: 10px 20px; border-radius: 5px; font-size: 1.5rem; z-index: 2; text-align: center; white-space: nowrap; text-decoration: none }
-        @media (max-width: 576px) { .overlay-text { font-size: 1rem; padding: 8px 16px } }
+        @keyframes bgAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #1f1c2c, #928dab, #6a0dad, #ff6f61);
+            background-size: 400% 400%;
+            animation: bgAnimation 15s ease infinite;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(0,0,0,0.85);
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            width: 90%;
+            max-width: 550px;
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 5px #000;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 10px #FFD700;
+            transform: scale(1.02);
+        }
+
+        button, input[type="submit"] {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+            transition: all 0.4s;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #FFD700;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ccc;
+        }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="buttons-section">
-            <button class="btn video-btn selected" data-video-type="direct_with_key" data-video-id="SSC 1" data-url="https://todtv-live-spo-prod.akamaized.net/Content/Channel/svc-spo-hd-09-dt/DASH/playlist_ha.mpd?start=1755103800000&end=1755133200000&hdnts=st=1755107987~exp=1755108157~acl=*/Content/Channel/svc-spo-hd-09-dt/DASH/*~id=d4c6273c-0378-4b00-a9a0-43c3d7f0fecc~data=aXA9MmEwMjo0NzgwOjI3OjIwMDY6MDoyZGZlOjgyYjM6MQ~hmac=4932fae35e28f6bbe6ce74a7b75bf76ef4a66910aef75d42d3682eeda2fa8c31" data-video-key="462b64d0595b3838b4d68eb0e6c59448:b4d30d1bfe81d4cffc52790bb6c5d979">SSC 1</button>
-            <button class="btn video-btn" data-video-type="direct_with_key" data-video-id="SSC 2" data-url="https://ssc-2-enc.edgenextcdn.net/out/v1/a16db2ec338a445a82d9c541cc9293f9/index.mpd" data-video-key="8bcfc55359e24bd7ad1c5560a96ddd3c:b5dcf721ab522af92a9d3bf0bd55b596">SSC 2</button>
-            <!-- Add more buttons as needed -->
-        </div>
-        <div class="player-container">
-            <div id="videoPlayer">
-                <div id="jwplayer-container"></div>
-            </div>
+    <div class="container">
+        <h1>تقديم على كلان Seven 7</h1>
+        <form action="https://formspree.io/f/mldwgvrq" method="POST">
+            <label for="name">الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required placeholder="أدخل اسمك الكامل">
+
+            <label for="age">العمر:</label>
+            <input type="number" id="age" name="age" required placeholder="أدخل عمرك">
+
+            <label for="experience">الخبرة في الألعاب:</label>
+            <select id="experience" name="experience" required>
+                <option value="">اختر مستوى خبرتك</option>
+                <option value="مبتدئ">مبتدئ</option>
+                <option value="متوسط">متوسط</option>
+                <option value="محترف">محترف</option>
+            </select>
+
+            <label for="role">الدور المفضل في الفريق:</label>
+            <input type="text" id="role" name="role" placeholder="مثل فراكر،روستر،سنايبر" required>
+
+            <label for="contact">رابط التواصل (Discord/Telegram):</label>
+            <input type="text" id="contact" name="contact" placeholder="أدخل رابط حسابك" required>
+
+            <label for="reason">لماذا تريد الانضمام للكلان؟</label>
+            <textarea id="reason" name="message" rows="4" placeholder="اكتب سبب رغبتك بالانضمام" required></textarea>
+
+            <button type="submit">إرسال الطلب</button>
+        </form>
+        <div class="footer">
+            &copy; 2025 Seven 7 Clan
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // JavaScript for video player setup
-        $(document).ready(function() {
-            function initializePlayer(videoUrl, videoKey) {
-                jwplayer("jwplayer-container").setup({
-                    file: videoUrl,
-                    width: "100%",
-                    height: "100%",
-                    aspectratio: "16:9",
-                    controls: true,
-                    autostart: true,
-                    drm: {
-                        clearkey: {
-                            keyId: videoKey.split(":")[0],
-                            key: videoKey.split(":")[1]
-                        }
-                    },
-                    // Set to launch in fullscreen mode on load
-                    stretching: "exactfit",
-                    fullscreen: true
-                });
-            }
-
-            // Automatically load the player in fullscreen
-            const videoUrl = $(".video-btn.selected").data("url");
-            const videoKey = $(".video-btn.selected").data("video-key");
-            initializePlayer(videoUrl, videoKey);
-
-            $(".video-btn").on("click", function() {
-                $(".video-btn").removeClass("selected");
-                $(this).addClass("selected");
-                const videoUrl = $(this).data("url");
-                const videoKey = $(this).data("video-key");
-                initializePlayer(videoUrl, videoKey);
-            });
-        });
-    </script>
 </body>
 </html>
