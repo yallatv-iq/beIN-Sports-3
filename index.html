@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عداد امتحانات نهاية السنة</title>
+    <title>عداد الامتحانات - الرابع أدبي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,18 +15,11 @@
             --text-muted: #94a3b8;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
 
         body {
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent),
-                radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.1), transparent);
+            background-image: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -35,22 +28,17 @@
             padding: 20px;
         }
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
+        .container { max-width: 850px; width: 100%; text-align: center; }
 
         h1 {
             font-size: 2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 700;
         }
 
-        /* الإحصائيات العلوية */
+        /* الإحصائيات */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -66,161 +54,136 @@
             backdrop-filter: blur(10px);
         }
 
-        .stat-card h3 {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
+        .stat-card p { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
 
-        .stat-card p {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        /* صناديق العداد التنازلي */
+        /* العداد التنازلي */
         .countdown-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
+            margin-bottom: 40px;
         }
 
         .countdown-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
-            padding: 25px 10px;
+            padding: 20px 10px;
             border-radius: 20px;
             border-bottom: 4px solid var(--accent-color);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
         }
 
-        .countdown-box:hover {
-            transform: translateY(-5px);
-        }
+        .number { font-size: 2.5rem; font-weight: 800; display: block; }
+        .label { font-size: 0.8rem; color: var(--text-muted); }
 
-        .number {
-            font-size: 3rem;
-            font-weight: 800;
-            display: block;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .exam-date {
+        /* قسم الطلاب */
+        .students-section {
             margin-top: 40px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            background: rgba(255,255,255,0.05);
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
         }
 
-        /* التجاوب مع الهاتف */
+        .students-title {
+            color: var(--secondary-accent);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .student-name {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .student-name:hover {
+            background: var(--accent-color);
+            color: #000;
+        }
+
         @media (max-width: 600px) {
-            .countdown-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .number { font-size: 2.2rem; }
+            .countdown-container { grid-template-columns: repeat(2, 1fr); }
             .stats-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>العد التنازلي لامتحانات نهاية السنة</h1>
+        <h1>العد التنازلي لامتحانات الرابع أدبي</h1>
 
         <div class="stats-grid">
             <div class="stat-card">
-                <h3>المتبقي كلياً</h3>
-                <p id="total-days">-- يوم</p>
+                <h3 style="font-size: 0.9rem; color: var(--text-muted);">المتبقي الكلي</h3>
+                <p id="total-days">19 يوم</p>
             </div>
             <div class="stat-card">
-                <h3>الدوام الفعلي (بدون جمعة وسبت)</h3>
-                <p id="work-days">-- يوم</p>
+                <h3 style="font-size: 0.9rem; color: var(--text-muted);">دوام فعلي (بدون عطل)</h3>
+                <p id="work-days">13 يوم</p>
             </div>
         </div>
 
         <div class="countdown-container">
-            <div class="countdown-box">
-                <span class="number" id="days">00</span>
-                <span class="label">أيام</span>
-            </div>
-            <div class="countdown-box">
-                <span class="number" id="hours">00</span>
-                <span class="label">ساعات</span>
-            </div>
-            <div class="countdown-box">
-                <span class="number" id="minutes">00</span>
-                <span class="label">دقائق</span>
-            </div>
-            <div class="countdown-box">
-                <span class="number" id="seconds">00</span>
-                <span class="label">ثواني</span>
+            <div class="countdown-box"><span class="number" id="days">00</span><span class="label">أيام</span></div>
+            <div class="countdown-box"><span class="number" id="hours">00</span><span class="label">ساعات</span></div>
+            <div class="countdown-box"><span class="number" id="minutes">00</span><span class="label">دقائق</span></div>
+            <div class="countdown-box"><span class="number" id="seconds">00</span><span class="label">ثواني</span></div>
+        </div>
+
+        <div class="students-section">
+            <h2 class="students-title">نخبة الصف الرابع الأدبي</h2>
+            <div class="students-grid">
+                <div class="student-name">محمد مجيد</div>
+                <div class="student-name">ليث اسامه</div>
+                <div class="student-name">عمر محمد</div>
+                <div class="student-name">عبدالله احمد</div>
             </div>
         </div>
 
-        <div class="exam-date">
-            تاريخ الامتحان: 26 أبريل 2026
-        </div>
+        <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.8rem;">تاريخ الامتحان المرتقب: 26 / 4 / 2026</p>
     </div>
 
     <script>
-        // تحديد موعد الامتحان (السنة، الشهر-1، اليوم)
         const examDate = new Date("April 26, 2026 08:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = examDate - now;
 
-            // حساب الوقت
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // تحديث العناصر في الصفحة
             document.getElementById("days").innerText = days.toString().padStart(2, '0');
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
             document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-
-            document.getElementById("total-days").innerText = days + " يوم";
-
-            // حساب أيام الدوام الفعلي
+            
+            // حساب الدوام الفعلي (تقريبي بناءً على الأيام المتبقية)
             document.getElementById("work-days").innerText = calculateWorkDays(new Date(), new Date("2026-04-26")) + " يوم";
-
-            if (distance < 0) {
-                clearInterval(interval);
-                document.querySelector(".container").innerHTML = "<h1>بالتوفيق في امتحاناتك!</h1>";
-            }
         }
 
-        function calculateWorkDays(startDate, endDate) {
+        function calculateWorkDays(start, end) {
             let count = 0;
-            let curDate = new Date(startDate.getTime());
-            while (curDate <= endDate) {
-                let dayOfWeek = curDate.getDay();
-                // 5 هو الجمعة، 6 هو السبت في JavaScript (0 هو الأحد)
-                if (dayOfWeek !== 5 && dayOfWeek !== 6) {
-                    count++;
-                }
-                curDate.setDate(curDate.getDate() + 1);
+            let cur = new Date(start.getTime());
+            while (cur <= end) {
+                if (cur.getDay() !== 5 && cur.getDay() !== 6) count++;
+                cur.setDate(cur.getDate() + 1);
             }
             return count;
         }
 
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // تشغيل فوري
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
