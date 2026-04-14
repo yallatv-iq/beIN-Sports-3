@@ -3,187 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عداد الامتحانات - الرابع أدبي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>منصة المراجعة النهائية | 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --accent-color: #38bdf8;
-            --secondary-accent: #818cf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-color: #0A0F1C;
+            --card-bg: #131A2A;
+            --accent-blue: #00E5FF;
+            --accent-purple: #7B2CBF;
+            --text-main: #FFFFFF;
+            --text-muted: #8E9BAE;
+            --border-color: rgba(255, 255, 255, 0.05);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
 
         body {
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent);
             color: var(--text-main);
-            min-height: 100vh;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
         }
-
-        .container { max-width: 850px; width: 100%; text-align: center; }
-
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* الإحصائيات */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-card p { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
 
         /* العداد التنازلي */
         .countdown-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .countdown-box {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            padding: 20px 10px;
+            background: linear-gradient(135deg, var(--card-bg), #1a243a);
+            border: 1px solid var(--accent-blue);
             border-radius: 20px;
-            border-bottom: 4px solid var(--accent-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .number { font-size: 2.5rem; font-weight: 800; display: block; }
-        .label { font-size: 0.8rem; color: var(--text-muted); }
-
-        /* قسم الطلاب */
-        .students-section {
-            margin-top: 40px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
         }
 
-        .students-title {
-            color: var(--secondary-accent);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
         }
 
-        .students-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-        }
-
-        .student-name {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 12px;
+        .time-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
             border-radius: 12px;
-            font-weight: 500;
+            min-width: 70px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+        }
+
+        .time-box label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* حاوية المواد */
+        .schedule-grid {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .subject-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
             transition: 0.3s;
         }
 
-        .student-name:hover {
-            background: var(--accent-color);
-            color: #000;
+        .subject-card:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.01);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .subject-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .subject-icon {
+            color: var(--accent-blue);
+            font-size: 1.4rem;
+        }
+
+        .date-badge {
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .tasks-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        /* التذييل والآية */
+        .footer-verse {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            width: 100%;
+        }
+
+        .quran-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .quran-container:hover {
+            background: rgba(0, 229, 255, 0.1);
+        }
+
+        .quran-verse {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+        }
+
+        .play-btn {
+            font-size: 1.5rem;
+            color: var(--text-main);
         }
 
         @media (max-width: 600px) {
-            .countdown-container { grid-template-columns: repeat(2, 1fr); }
-            .stats-grid { grid-template-columns: 1fr; }
+            .countdown-timer { gap: 8px; }
+            .time-box { min-width: 60px; }
+            .quran-verse { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>العد التنازلي لامتحانات الرابع أدبي</h1>
+    <div class="countdown-container">
+        <h3>المتبقي على الامتحانات (13 يونيو)</h3>
+        <div class="countdown-timer" id="timer">
+            <div class="time-box"><span id="days">00</span><label>يوم</label></div>
+            <div class="time-box"><span id="hours">00</span><label>ساعة</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>دقيقة</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>ثانية</label></div>
+        </div>
+    </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3 style="font-size: 0.9rem; color: var(--text-muted);">المتبقي الكلي</h3>
-                <p id="total-days">19 يوم</p>
+    <div class="schedule-grid">
+        
+        <div class="subject-card">
+            <div class="card-header">
+                <div class="subject-title"><i class="fa-solid fa-calculator subject-icon"></i> الرياضيات</div>
+                <div class="date-badge">12-04 إلى 20-04</div>
             </div>
-            <div class="stat-card">
-                <h3 style="font-size: 0.9rem; color: var(--text-muted);">دوام فعلي (بدون عطل)</h3>
-                <p id="work-days">13 يوم</p>
-            </div>
+            <ul class="tasks-list">
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> مراجعة الجبر والتفاضل</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> حل اختبارات سابقة</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> التركيز على المسائل المعقدة</li>
+            </ul>
         </div>
 
-        <div class="countdown-container">
-            <div class="countdown-box"><span class="number" id="days">00</span><span class="label">أيام</span></div>
-            <div class="countdown-box"><span class="number" id="hours">00</span><span class="label">ساعات</span></div>
-            <div class="countdown-box"><span class="number" id="minutes">00</span><span class="label">دقائق</span></div>
-            <div class="countdown-box"><span class="number" id="seconds">00</span><span class="label">ثواني</span></div>
-        </div>
-
-        <div class="students-section">
-            <h2 class="students-title">نخبة الصف الرابع الأدبي</h2>
-            <div class="students-grid">
-                <div class="student-name">محمد مجيد</div>
-                <div class="student-name">ليث اسامه</div>
-                <div class="student-name">عمر محمد</div>
-                <div class="student-name">عبدالله احمد</div>
+        <div class="subject-card">
+            <div class="card-header">
+                <div class="subject-title"><i class="fa-solid fa-flask subject-icon"></i> الكيمياء</div>
+                <div class="date-badge">21-04 إلى 29-04</div>
             </div>
+            <ul class="tasks-list">
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> حفظ الجدول الدوري</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> فهم المعادلات الكيميائية</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> مراجعة التجارب العملية</li>
+            </ul>
         </div>
 
-        <p style="margin-top: 30px; color: var(--text-muted); font-size: 0.8rem;">تاريخ الامتحان المرتقب: 26 / 4 / 2026</p>
+        <div class="subject-card">
+            <div class="card-header">
+                <div class="subject-title"><i class="fa-solid fa-atom subject-icon"></i> الفيزياء</div>
+                <div class="date-badge">30-04 إلى 10-05</div>
+            </div>
+            <ul class="tasks-list">
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> قوانين الحركة والقوة</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> مسائل الكهرباء والمغناطيسية</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> مراجعة قوانين الطاقة</li>
+            </ul>
+        </div>
+
+        <div class="subject-card">
+            <div class="card-header">
+                <div class="subject-title"><i class="fa-solid fa-dna subject-icon"></i> الأحياء</div>
+                <div class="date-badge">11-05 إلى 18-05</div>
+            </div>
+            <ul class="tasks-list">
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> دراسة الخلية وعملياتها</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> تصنيف الكائنات الحية</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> علم الوراثة والبيئة</li>
+            </ul>
+        </div>
+
+        <div class="subject-card">
+            <div class="card-header">
+                <div class="subject-title"><i class="fa-solid fa-pen-nib subject-icon"></i> اللغة العربية</div>
+                <div class="date-badge">19-05 إلى 26-05</div>
+            </div>
+            <ul class="tasks-list">
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> مراجعة قواعد النحو</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> دراسة النصوص الأدبية</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> التدريب على التعبير</li>
+            </ul>
+        </div>
+
+        <div class="subject-card">
+            <div class="card-header">
+                <div class="subject-title"><i class="fa-solid fa-mosque subject-icon"></i> التربية الإسلامية</div>
+                <div class="date-badge">27-05 إلى 01-06</div>
+            </div>
+            <ul class="tasks-list">
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> حفظ السور والآيات المقررة</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> فهم الأحاديث الشريفة</li>
+                <li class="task-item"><input type="checkbox" class="custom-checkbox"> مراجعة الأحكام الفقهية</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-verse">
+        <div class="quran-container" onclick="toggleAudio()">
+            <i class="fa-solid fa-circle-play play-btn" id="playIcon"></i>
+            <span class="quran-verse">﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾</span>
+            <audio id="quranAudio" src="https://everyayah.com/data/Abdul_Basit_Murattal_64kbps/020114.mp3"></audio>
+        </div>
+        <p style="color: var(--text-muted); margin-top: 20px;">اضغط على الآية للاستماع</p>
     </div>
 
     <script>
-        const examDate = new Date("April 26, 2026 08:00:00").getTime();
-
+        // 1. برمجة العداد التنازلي لليوم 13-06
         function updateCountdown() {
+            const targetDate = new Date("June 13, 2026 00:00:00").getTime();
             const now = new Date().getTime();
-            const distance = examDate - now;
+            const diff = targetDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerText = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-            
-            // حساب الدوام الفعلي (تقريبي بناءً على الأيام المتبقية)
-            document.getElementById("work-days").innerText = calculateWorkDays(new Date(), new Date("2026-04-26")) + " يوم";
+            document.getElementById("days").innerHTML = d;
+            document.getElementById("hours").innerHTML = h;
+            document.getElementById("minutes").innerHTML = m;
+            document.getElementById("seconds").innerHTML = s;
         }
-
-        function calculateWorkDays(start, end) {
-            let count = 0;
-            let cur = new Date(start.getTime());
-            while (cur <= end) {
-                if (cur.getDay() !== 5 && cur.getDay() !== 6) count++;
-                cur.setDate(cur.getDate() + 1);
-            }
-            return count;
-        }
-
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // 2. برمجة الصوت
+        function toggleAudio() {
+            const audio = document.getElementById("quranAudio");
+            const icon = document.getElementById("playIcon");
+            if (audio.paused) {
+                audio.play();
+                icon.classList.replace("fa-circle-play", "fa-circle-pause");
+            } else {
+                audio.pause();
+                icon.classList.replace("fa-circle-pause", "fa-circle-play");
+            }
+        }
     </script>
 </body>
 </html>
